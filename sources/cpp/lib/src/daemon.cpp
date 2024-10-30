@@ -2,7 +2,7 @@
 #include <iostream>
 #include <unistd.h> // For sleep()
 
-namespace cpp_daemon {
+namespace vdaemon {
 
 Daemon::Daemon(const std::string& name, int interval)
     : name_(name)
@@ -35,4 +35,10 @@ void Daemon::run()
     std::cout << "Daemon '" << name_ << "' has stopped." << std::endl;
 }
 
+int Daemon::status()
+{
+    return running_ ? 0 : 1;
+
 }
+
+} // namespace vdaemon

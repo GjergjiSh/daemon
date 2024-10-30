@@ -3,13 +3,23 @@
 
 #include <string>
 
-namespace cpp_daemon {
+namespace vdaemon {
 
-class Daemon {
+class IDaemon {
+public:
+    virtual ~IDaemon() = default;
+
+    virtual void start() = 0;
+    virtual void stop() = 0;
+    virtual int status() = 0;
+};
+
+class Daemon : public IDaemon {
 public:
     Daemon(const std::string& name, int interval);
-    void start();
-    void stop();
+    void start() override;
+    void stop() override;
+    int status() override;
 
 private:
     std::string name_;
@@ -19,7 +29,6 @@ private:
     void run();
 };
 
-
-} // namespace cpp_daemon
+} // namespace vdaemon
 
 #endif // DAEMON_H
