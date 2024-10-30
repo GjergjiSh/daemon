@@ -1,0 +1,13 @@
+# /etc/systemd/system/cpp_daemon.service
+
+[Unit]
+Description=CPP Daemon Example
+After=network.target
+
+# TODO: Absolute Path!
+[Service]
+ExecStart=/home/gshkurti/Repos/daemon/sources/cpp/build/examples/daemon_example
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

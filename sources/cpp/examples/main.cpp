@@ -3,6 +3,7 @@
 
 int main()
 {
-    daemon::foo();
+    cpp_daemon::Daemon daemon("example", 5);
+    daemon.start();
     return 0;
 }

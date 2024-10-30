@@ -1,11 +1,38 @@
 #include <daemon.h>
 #include <iostream>
+#include <unistd.h> // For sleep()
 
-namespace daemon {
+namespace cpp_daemon {
 
-void foo()
+Daemon::Daemon(const std::string& name, int interval)
+    : name_(name)
+    , interval_(interval)
+    , running_(false)
 {
-    std::cout << "Hello from daemon" << std::endl;
 }
 
-} // namespace daemon
+void Daemon::start()
+{
+    if (!running_) {
+        running_ = true;
+        run();
+    }
+}
+
+void Daemon::stop()
+{
+    if (running_) {
+        running_ = false;
+    }
+}
+
+void Daemon::run()
+{
+    while (running_) {
+        std::cout << "Daemon '" << name_ << "' is running..." << std::endl;
+        sleep(interval_);
+    }
+    std::cout << "Daemon '" << name_ << "' has stopped." << std::endl;
+}
+
+}
